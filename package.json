@@ -1,5 +1,5 @@
 {
-  "name": "subql-dictionary",
+  "name": "ternoa-subql-dictionary",
   "version": "1.0.0",
   "description": "A subquery project provide dictionary data & service for a substrate-based network",
   "main": "dist/index.js",

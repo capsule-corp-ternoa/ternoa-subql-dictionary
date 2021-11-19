@@ -1,36 +1,74 @@
 type SpecVersion @entity {
-
   id: ID! #specVersion
-
   blockHeight: BigInt!
+}
 
+type Block @entity{
+  id: ID!
+  number: Int!
+  hash: String! @index(unique:true)
+  timestamp: Date! @index(unique:true)
+  parentHash: String!
+  stateRoot: String!
+  extrinsicsRoot: String!
+  runtimeVersion: Int!
+  nbExtrinsics: Int!
+  author: String @index
+  sessionId: Int @index
+}
+
+type Session @entity{
+  id: ID!
+  validators: [String]!
+}
+
+type Extrinsic @entity {
+  id: ID!
+  block: Block!
+  module: String! @index
+  call: String! @index
+  blockHeight: BigInt! @index
+  success: Boolean!
+  isSigned: Boolean!
+  extrinsicIndex: Int!
+  hash: String! @index(unique:true)
+  timestamp: Date! @index
+  description: ExtrinsicDescription!
+  signer: String! @index
+  signature: String!
+  fees: String
+  nonce: Int!
+  argsName: [String]!
+  argsValue: [String]!
+  nbEvents: Int!
+}
+
+type ExtrinsicDescription @entity{
+  id: ID!
+  module: String!
+  call: String!
+  description: String!
 }
 
 
 type Event @entity {
-
   id: ID!
-
+  block: Block!
   module: String! @index
-
   event: String! @index
-
   blockHeight: BigInt! @index
+  extrinsicId: String
+  eventIndex: Int!
+  call: String! @index
+  description: EventDescription!
+  argsName: [String]!
+  argsValue: [String]!
 }
 
 
-type Extrinsic @entity {
-
+type EventDescription @entity{
   id: ID!
-
-  module: String! @index
-
-  call: String! @index
-
-  blockHeight: BigInt! @index
-
-  success: Boolean!
-
-  isSigned: Boolean!
-
+  module: String!
+  call: String!
+  description: String!
 }
