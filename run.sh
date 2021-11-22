@@ -21,4 +21,4 @@ set -x
 
 env | grep DB_
 
-subql-query --name subql-dictionnary-ternoa --playground
+subql-query --name subql-dictionary-ternoa --playground
