@@ -29,10 +29,10 @@ npm install -g @subql/node
 
 
 # ----Installing dependencies----
-npm install
+yarn
 
 # ----Building Ternoa-Subql----
-npm run build
+yarn codegen
 
 # ----Codegen Ternoa-Subql----
-npm run codegen
+yarn build
