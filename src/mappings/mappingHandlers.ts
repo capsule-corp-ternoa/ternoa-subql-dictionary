@@ -1,7 +1,7 @@
 import {SubstrateExtrinsic,SubstrateEvent,SubstrateBlock} from "@subql/types";
 import { blockHandler } from "../handlers";
 import {SpecVersion,Event,Extrinsic, EventDescription, ExtrinsicDescription} from "../types";
-import { getFees } from "../utils/extrinsic";
+import { checkIfExtrinsicExecuteSuccess, getFees } from "../utils/extrinsic";
 
 
 export async function handleBlock(block: SubstrateBlock): Promise<void> {
@@ -24,7 +24,7 @@ export async function handleCall(extrinsic: SubstrateExtrinsic): Promise<void> {
             const documentation = ext.meta.documentation ? ext.meta.documentation : (ext.meta as any).docs
             const extrinsicRecord = new Extrinsic(`${block.block.header.number.toString()}-${extrinsic.idx}`);
             extrinsicRecord.blockId = block.block.header.number.toString()
-            extrinsicRecord.blockHeight = extrinsic.block.block.header.number.toBigInt();
+            extrinsicRecord.blockHeight = block.block.header.number.toBigInt();
             extrinsicRecord.extrinsicIndex = extrinsic.idx
             extrinsicRecord.hash = ext.hash.toString()
             extrinsicRecord.timestamp = block.timestamp
@@ -34,12 +34,11 @@ export async function handleCall(extrinsic: SubstrateExtrinsic): Promise<void> {
             extrinsicRecord.isSigned = ext.isSigned
             extrinsicRecord.signature = ext.signature.toString()
             extrinsicRecord.nonce = ext.nonce.toNumber()
-            extrinsicRecord.success = extrinsic.success;
+            extrinsicRecord.success = checkIfExtrinsicExecuteSuccess(extrinsic);
             extrinsicRecord.argsName = methodData.meta.args.map(a => a.name.toString())
             extrinsicRecord.argsValue = methodData.args.map((a) => a.toString())
             extrinsicRecord.nbEvents = extrinsic.events.length
             extrinsicRecord.fees = await getFees(ext.toHex(), block.block.header.hash.toHex())
-            extrinsicRecord.isSigned = extrinsic.extrinsic.isSigned;
             let descriptionRecord = await ExtrinsicDescription.get(`${methodData.section}_${methodData.method}`)
             if (!descriptionRecord){
                 descriptionRecord = new ExtrinsicDescription(`${methodData.section}_${methodData.method}`)
@@ -71,13 +70,18 @@ export async function handleEvent(event: SubstrateEvent): Promise<void> {
             newEvent.blockId = blockNumber.toString()
             if (event.extrinsic) newEvent.extrinsicId = `${blockNumber}-${event.extrinsic.idx}`
             newEvent.blockHeight = event.block.block.header.number.toBigInt();
-            newEvent.module = event.event.section;
-            newEvent.event = event.event.method;
             newEvent.eventIndex = event.idx
+            newEvent.event = eventData.method;
             newEvent.module = eventData.section
             newEvent.call = eventData.method
             newEvent.argsName = eventData.meta.args.map(a => a.toString())
-            newEvent.argsValue = eventData.data.map(a => a.toString())
+            newEvent.argsValue = eventData.data.map(a => JSON.stringify(a).indexOf('u0000') === -1 ? 
+                a.toString()
+            : 
+                JSON.stringify(a).split("u0000").join('')
+                    .split("\\").join('')
+                    .split("\"").join('')
+            )
             let descriptionRecord = await EventDescription.get(`${eventData.section}_${eventData.method}`)
             if (!descriptionRecord){
                 descriptionRecord = new EventDescription(`${eventData.section}_${eventData.method}`)
