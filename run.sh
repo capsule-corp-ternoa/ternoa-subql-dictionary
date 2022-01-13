@@ -20,4 +20,8 @@ set -x
 [ -z "$DB_PORT" ] && export DB_PORT="$POSTGRESQL_ADDON_PORT"
 
 env | grep DB_
+
+# ----Installing Subql-query----
+npm install -g @subql/query
+
 subql-query --name subql-dictionary-ternoa --playground
