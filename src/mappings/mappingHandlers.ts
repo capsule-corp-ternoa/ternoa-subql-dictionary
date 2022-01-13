@@ -21,7 +21,7 @@ export async function handleCall(extrinsic: SubstrateExtrinsic): Promise<void> {
         if(thisExtrinsic === undefined){
             const ext = extrinsic.extrinsic
             const methodData = ext.method
-            const documentation = ext.meta.documentation ? ext.meta.documentation : (ext.meta as any).docs
+            const documentation = ext.meta.docs ? ext.meta.docs : JSON.parse(JSON.stringify(ext.meta)).documentation
             const extrinsicRecord = new Extrinsic(`${block.block.header.number.toString()}-${extrinsic.idx}`);
             extrinsicRecord.blockId = block.block.header.number.toString()
             extrinsicRecord.blockHeight = block.block.header.number.toBigInt();
@@ -65,7 +65,7 @@ export async function handleEvent(event: SubstrateEvent): Promise<void> {
             const blockHeader = event.block.block.header
             const blockNumber = blockHeader.number.toNumber()
             const eventData = event.event
-            const documentation = eventData.meta.documentation ? eventData.meta.documentation : (eventData.meta as any).docs
+            const documentation = eventData.meta.docs ? eventData.meta.docs : JSON.parse(JSON.stringify(eventData.meta)).documentation
             const newEvent = new Event(`${blockNumber}-${event.idx}`);
             newEvent.blockId = blockNumber.toString()
             if (event.extrinsic) newEvent.extrinsicId = `${blockNumber}-${event.extrinsic.idx}`
