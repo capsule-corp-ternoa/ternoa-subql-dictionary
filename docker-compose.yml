@@ -24,8 +24,11 @@ services:
     volumes:
       - ./:/app
     command:
-      - -f=/app
-      - --local
+      - '-f'
+      - '/app'
+      - '--db-schema=subql-dictionary-ternoa'
+      - '--timeout'
+      - '270'
 
   graphql-engine:
     image: onfinality/subql-query:latest
@@ -41,5 +44,6 @@ services:
       DB_HOST: postgres
       DB_PORT: 5432
     command:
-      - --name=app
-      - --playground
+      - '--name'
+      - 'subql-dictionary-ternoa' #Same as your project db_schema
+      - '--playground'
