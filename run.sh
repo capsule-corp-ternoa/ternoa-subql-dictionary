@@ -23,5 +23,4 @@ env | grep DB_
 
 # ----Installing Subql-query----
 npm install -g @subql/query
-
 subql-query --name subql-dictionary-ternoa --playground
