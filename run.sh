@@ -20,7 +20,4 @@ set -x
 [ -z "$DB_PORT" ] && export DB_PORT="$POSTGRESQL_ADDON_PORT"
 
 env | grep DB_
-yarn
-yarn codegen
-yarn build
 subql-query --name subql-dictionary-ternoa --playground
