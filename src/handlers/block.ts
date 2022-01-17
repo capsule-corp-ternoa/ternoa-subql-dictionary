@@ -1,8 +1,14 @@
 import { SubstrateBlock } from "@subql/types";
-import { Block, Session } from "../types";
+import { Block, Session, SpecVersion} from "../types";
 
 export const blockHandler = async (block: SubstrateBlock): Promise<void> => {
     try{
+        const specVersion = await SpecVersion.get(block.specVersion.toString());
+        if(specVersion === undefined){
+            const newSpecVersion = new SpecVersion(block.specVersion.toString());
+            newSpecVersion.blockHeight = block.block.header.number.toBigInt();
+            await newSpecVersion.save();
+        }
         const blockHeader = block.block.header
         const blockExtrinsics = block.block.extrinsics
         //const logs = block.block.header.digest.logs

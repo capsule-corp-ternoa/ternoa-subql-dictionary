@@ -22,7 +22,13 @@ dataSources:
       handlers:
         - handler: handleBlock
           kind: substrate/BlockHandler
+          filter: 
+            specVersion: [42]
         - handler: handleEvent
           kind: substrate/EventHandler
+          filter: 
+            specVersion: [42]
         - handler: handleCall
           kind: substrate/CallHandler
+          filter: 
+            specVersion: [42]
