@@ -1,16 +1,11 @@
 import {SubstrateExtrinsic,SubstrateEvent,SubstrateBlock} from "@subql/types";
 import { blockHandler } from "../handlers";
-import {SpecVersion,Event,Extrinsic, EventDescription, ExtrinsicDescription} from "../types";
-import { checkIfExtrinsicExecuteSuccess, getFees } from "../utils/extrinsic";
+import {Event,Extrinsic, EventDescription, ExtrinsicDescription} from "../types";
+import { checkIfExtrinsicExecuteSuccess, getFees, shouldGetFees } from "../utils/extrinsic";
 
 
 export async function handleBlock(block: SubstrateBlock): Promise<void> {
-    const specVersion = await SpecVersion.get(block.specVersion.toString());
-    if(specVersion === undefined){
-        const newSpecVersion = new SpecVersion(block.specVersion.toString());
-        newSpecVersion.blockHeight = block.block.header.number.toBigInt();
-        await newSpecVersion.save();
-    }
+    if (block.block.header.number.toNumber() % 100 === 0) logger.info("Handling block with specversion " + block.specVersion)
     await blockHandler(block)
 }
 
@@ -38,7 +33,7 @@ export async function handleCall(extrinsic: SubstrateExtrinsic): Promise<void> {
             extrinsicRecord.argsName = methodData.meta.args.map(a => a.name.toString())
             extrinsicRecord.argsValue = methodData.args.map((a) => a.toString())
             extrinsicRecord.nbEvents = extrinsic.events.length
-            extrinsicRecord.fees = await getFees(ext.toHex(), block.block.header.hash.toHex())
+            extrinsicRecord.fees = shouldGetFees(extrinsicRecord.module) ? await getFees(ext.toHex(), block.block.header.hash.toHex()) : ""
             let descriptionRecord = await ExtrinsicDescription.get(`${methodData.section}_${methodData.method}`)
             if (!descriptionRecord){
                 descriptionRecord = new ExtrinsicDescription(`${methodData.section}_${methodData.method}`)
