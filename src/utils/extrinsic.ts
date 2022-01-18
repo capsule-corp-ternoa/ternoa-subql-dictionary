@@ -32,4 +32,12 @@ export const checkIfExtrinsicExecuteSuccess = (extrinsic: SubstrateExtrinsic): b
   
       return method === 'ExtrinsicFailed' && section === 'system'
     })
-  }
+}
+
+export const shouldGetFees = (module: string): boolean => {
+    const ignoreModules = [
+        'timestamp',
+        'authorship'
+    ]
+    return !ignoreModules.includes(module)
+}

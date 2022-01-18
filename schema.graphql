@@ -25,6 +25,7 @@ type Session @entity{
 type Extrinsic @entity {
   id: ID!
   block: Block!
+  txHash: String! @index(unique:true)
   module: String! @index
   call: String! @index
   blockHeight: BigInt! @index
@@ -57,7 +58,6 @@ type Event @entity {
   module: String! @index
   event: String! @index
   blockHeight: BigInt! @index
-  extrinsicId: String
   eventIndex: Int!
   call: String! @index
   description: EventDescription!
