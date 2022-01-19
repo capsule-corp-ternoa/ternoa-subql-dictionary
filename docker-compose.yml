@@ -47,3 +47,4 @@ services:
       - '--name'
       - 'subql-dictionary-ternoa' #Same as your project db_schema
       - '--playground'
+      - --unsafe #Allows us to query more than 100 rows
