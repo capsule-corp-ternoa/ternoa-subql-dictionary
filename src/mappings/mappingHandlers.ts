@@ -1,7 +1,7 @@
 import { EventRecord } from "@polkadot/types/interfaces"
 import { SubstrateExtrinsic, SubstrateBlock } from "@subql/types";
 import { blockHandler } from "../handlers";
-import { Event,Extrinsic, EventDescription, ExtrinsicDescription, SpecVersion } from "../types";
+import { Event,Extrinsic, EventDescription, ExtrinsicDescription, SpecVersion, Block } from "../types";
 import { checkIfExtrinsicExecuteSuccess, getFees, shouldGetFees } from "../utils/extrinsic";
 import { wrapExtrinsics } from "../utils";
 
@@ -9,13 +9,16 @@ import { wrapExtrinsics } from "../utils";
 let specVersion: SpecVersion;
 export async function handleBlock(block: SubstrateBlock): Promise<void> {
     if (block.block.header.number.toNumber() % 100 === 0) logger.info("Handling block with specversion " + block.specVersion)
-    await blockHandler(block, specVersion)
-    const events = block.events.filter(evt => evt.event.section!=='system' && evt.event.method!=='ExtrinsicSuccess').map(async (evt, idx)=> await handleEvent(block.block.header.number.toString(), idx, evt));
-    const calls = wrapExtrinsics(block).map((ext,idx)=>handleCall(`${block.block.header.number.toString()}-${idx}`,ext));
-    await Promise.all([
-        store.bulkCreate('Event', await Promise.all(events)),
-        store.bulkCreate('Extrinsic', await Promise.all(calls))
-    ]);
+    const dbBlock = await Block.get(block.block.header.number.toString())
+    if (!dbBlock){
+        await blockHandler(block, specVersion)
+        const events = block.events.filter(evt => evt.event.section!=='system' && evt.event.method!=='ExtrinsicSuccess').map(async (evt, idx)=> await handleEvent(block.block.header.number.toString(), idx, evt));
+        const calls = wrapExtrinsics(block).map((ext,idx)=>handleCall(`${block.block.header.number.toString()}-${idx}`,ext));
+        await Promise.all([
+            store.bulkCreate('Event', await Promise.all(events)),
+            store.bulkCreate('Extrinsic', await Promise.all(calls))
+        ]);
+    }
 }
 
 export async function handleCall(idx: string, extrinsic: SubstrateExtrinsic): Promise<Extrinsic> {
