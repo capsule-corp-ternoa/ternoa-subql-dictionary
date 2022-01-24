@@ -44,6 +44,7 @@ export async function handleCall(idx: string, extrinsic: SubstrateExtrinsic): Pr
         extrinsicRecord.argsName = methodData.meta.args.map(a => a.name.toString())
         extrinsicRecord.argsValue = methodData.args.map((a) => a.toString())
         extrinsicRecord.nbEvents = extrinsic.events.length
+        extrinsicRecord.eventIndexes = extrinsic.events.map((_x,i) => `${block.block.header.number.toString()}-${i}`)
         extrinsicRecord.fees = shouldGetFees(extrinsicRecord.module) ? await getFees(ext.toHex(), block.block.header.hash.toHex()) : ""
         let descriptionRecord = await ExtrinsicDescription.get(`${methodData.section}_${methodData.method}`)
         if (!descriptionRecord){

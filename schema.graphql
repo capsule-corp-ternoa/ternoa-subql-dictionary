@@ -42,6 +42,7 @@ type Extrinsic @entity {
   argsName: [String]!
   argsValue: [String]!
   nbEvents: Int!
+  eventIndexes: [String]!
 }
 
 type ExtrinsicDescription @entity{
