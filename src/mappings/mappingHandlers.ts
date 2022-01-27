@@ -15,9 +15,9 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
         await blockHandler(block, specVersion)
         const wrappedExtrinsics = wrapExtrinsics(block)
         const calls = wrappedExtrinsics.map((ext,idx)=> handleCall(`${blockNumber.toString()}-${idx}`,ext));
-        const events = block.events.map(async (evt, idx)=> {
+        const events = block.events.map((evt, idx)=> {
             const relatedExtrinsicIndex = evt.phase.isApplyExtrinsic ? evt.phase.asApplyExtrinsic.toNumber() : -1
-            return await handleEvent(blockNumber.toString(), idx, evt, relatedExtrinsicIndex)
+            return handleEvent(blockNumber.toString(), idx, evt, relatedExtrinsicIndex)
         });
         await Promise.all([
             store.bulkCreate('Event', await Promise.all(events)),
