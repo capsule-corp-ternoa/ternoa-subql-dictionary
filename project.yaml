@@ -14,6 +14,8 @@ network:
   # endpoint: wss://staging.chaos.ternoa.com
   # genesisHash: '0x710016a91bfbd4ffc5035ae19b7b94be74a2fd2f693cc692aaedae35c0cacd58'
   # endpoint: wss://dev.chaos.ternoa.com
+  chaintypes:
+    file: ./types.json
 dataSources:
   - kind: substrate/Runtime
     startBlock: 1
