@@ -2,18 +2,23 @@ import { EventRecord } from "@polkadot/types/interfaces"
 import { SubstrateExtrinsic, SubstrateBlock } from "@subql/types";
 import { blockHandler } from "../handlers";
 import { Event,Extrinsic, EventDescription, ExtrinsicDescription, SpecVersion, Block } from "../types";
-import { checkIfExtrinsicExecuteSuccess, getFees, shouldGetFees } from "../utils/extrinsic";
+import { checkIfExtrinsicExecuteSuccess, getFees, roundPrice, shouldGetFees } from "../utils/extrinsic";
 import { wrapExtrinsics } from "../utils";
 
 
 let specVersion: SpecVersion;
 export async function handleBlock(block: SubstrateBlock): Promise<void> {
-    if (block.block.header.number.toNumber() % 100 === 0) logger.info("Handling block with specversion " + block.specVersion)
-    const dbBlock = await Block.get(block.block.header.number.toString())
+    const blockNumber = block.block.header.number.toNumber()
+    if (blockNumber % 100 === 0) logger.info("Handling block with specversion " + block.specVersion)
+    const dbBlock = await Block.get(blockNumber.toString())
     if (!dbBlock){
         await blockHandler(block, specVersion)
-        const events = block.events.filter(evt => evt.event.section!=='system' && evt.event.method!=='ExtrinsicSuccess').map(async (evt, idx)=> await handleEvent(block.block.header.number.toString(), idx, evt));
-        const calls = wrapExtrinsics(block).map((ext,idx)=>handleCall(`${block.block.header.number.toString()}-${idx}`,ext));
+        const wrappedExtrinsics = wrapExtrinsics(block)
+        const calls = wrappedExtrinsics.map((ext,idx)=> handleCall(`${blockNumber.toString()}-${idx}`,ext));
+        const events = block.events.map((evt, idx)=> {
+            const relatedExtrinsicIndex = evt.phase.isApplyExtrinsic ? evt.phase.asApplyExtrinsic.toNumber() : -1
+            return handleEvent(blockNumber.toString(), idx, evt, relatedExtrinsicIndex)
+        });
         await Promise.all([
             store.bulkCreate('Event', await Promise.all(events)),
             store.bulkCreate('Extrinsic', await Promise.all(calls))
@@ -45,6 +50,7 @@ export async function handleCall(idx: string, extrinsic: SubstrateExtrinsic): Pr
         extrinsicRecord.argsValue = methodData.args.map((a) => a.toString())
         extrinsicRecord.nbEvents = extrinsic.events.length
         extrinsicRecord.fees = shouldGetFees(extrinsicRecord.module) ? await getFees(ext.toHex(), block.block.header.hash.toHex()) : ""
+        extrinsicRecord.feesRounded = roundPrice(extrinsicRecord.fees)
         let descriptionRecord = await ExtrinsicDescription.get(`${methodData.section}_${methodData.method}`)
         if (!descriptionRecord){
             descriptionRecord = new ExtrinsicDescription(`${methodData.section}_${methodData.method}`)
@@ -63,7 +69,7 @@ export async function handleCall(idx: string, extrinsic: SubstrateExtrinsic): Pr
     }
 }
 
-export async function handleEvent(blockNumber: string, eventIdx: number, event: EventRecord): Promise<Event> {
+export async function handleEvent(blockNumber: string, eventIdx: number, event: EventRecord, extrinsicId: number): Promise<Event> {
     try{
         const eventData = event.event
         const documentation = eventData.meta.docs ? eventData.meta.docs : JSON.parse(JSON.stringify(eventData.meta)).documentation
@@ -74,6 +80,7 @@ export async function handleEvent(blockNumber: string, eventIdx: number, event: 
         newEvent.event = eventData.method;
         newEvent.module = eventData.section
         newEvent.call = eventData.method
+        if (extrinsicId !== -1) newEvent.extrinsicId = `${blockNumber}-${extrinsicId}`
         newEvent.argsName = eventData.meta.args.map(a => a.toString())
         newEvent.argsValue = eventData.data.map(a => JSON.stringify(a).indexOf('u0000') === -1 ? 
             a.toString()

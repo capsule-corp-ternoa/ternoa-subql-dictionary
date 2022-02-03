@@ -38,6 +38,7 @@ type Extrinsic @entity {
   signer: String! @index
   signature: String!
   fees: String
+  feesRounded: Float
   nonce: Int!
   argsName: [String]!
   argsValue: [String]!
@@ -51,10 +52,10 @@ type ExtrinsicDescription @entity{
   description: String!
 }
 
-
 type Event @entity {
   id: ID!
   block: Block!
+  extrinsicId: String
   module: String! @index
   event: String! @index
   blockHeight: BigInt! @index
