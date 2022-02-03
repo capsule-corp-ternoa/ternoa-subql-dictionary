@@ -52,7 +52,6 @@ type ExtrinsicDescription @entity{
   description: String!
 }
 
-
 type Event @entity {
   id: ID!
   block: Block!
