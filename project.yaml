@@ -25,4 +25,4 @@ dataSources:
         - handler: handleBlock
           kind: substrate/BlockHandler
           filter: 
-            specVersion: [40, 40]
+            specVersion: [41, 41]
