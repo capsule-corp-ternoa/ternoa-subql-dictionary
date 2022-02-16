@@ -21,17 +21,19 @@ set -x
 
 env | grep DB_
 
-# ----Installing Subql-query----
-npm install -g @subql/query
+# ----Installing Ternoa-Query----
+./scripts/build-submodule.sh
 
 # ----Installing Subql-Node----
 npm install -g @subql/node
 
 # ----Installing dependencies----
-yarn
-
-# ----Building Ternoa-Subql----
-yarn codegen
+npm install
 
 # ----Codegen Ternoa-Subql----
-yarn build
+npm run codegen
+
+# ----Building Ternoa-Subql----
+npm run build
+
+subql-node -f . --db-schema=subql_ternoa --timeout $TIMEOUT
