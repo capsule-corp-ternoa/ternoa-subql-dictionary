@@ -13,6 +13,7 @@
         "NFTId": "u32",
         "String": "Text",
         "NFTSeriesId": "Text",
+        "TernoaString": "Vec<u8>",
         "NFTData": {
             "owner": "AccountId",
             "ipfs_reference": "String",
