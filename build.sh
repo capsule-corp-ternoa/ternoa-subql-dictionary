@@ -25,7 +25,7 @@ env | grep DB_
 npm install -g @subql/query
 
 # ----Installing Subql-Node----
-npm install -g @subql/node
+npm install -g @subql/node@v0.29.1
 
 # ----Installing dependencies----
 yarn
