@@ -1,8 +1,13 @@
-# Dictionary Implementation (Introduction)
+# 🤔 Introduction
 
-## 🤔 Installation 
+The main function of the `dictionary` is for it to act as a middle man between the `Blockchain` and the `Indexer`. This allows the Indexer to query blocks' metadata from the dictionary. 
 
-You can customiize your own implementation of the dictionary to fit your needs 
+This allows one to query blocks for specific events and return the required blocks. For example : If one wants to fetch NFT creation events only, the `Indexer` will ask the dictionary for the corresponding blocks therefore only returing blocks where NFT creation took place (5, 9, 32 etc.) instead of all blocks (1 - 100).
+
+This provide a glossary of data that pre indexes On-Chain events which drastically improves the Indexing performance.
+
+
+## Installation 
 
 #### 1. Clone the Repository
 
@@ -72,7 +77,7 @@ docker-compose up
 
 The Dictionary records all generic data (intrinsic and extrinsic) which can later be used to relay On-Chain information in an appropriate manner for an [explorer](https://etherscan.io/). 
 
-Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here.
+Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here
 
 ## SubQuery - Project
 
@@ -85,6 +90,7 @@ It scans the network for each and all events (intrinsic or extrinsic) block by b
 If you want to create your SubQuery Dictionary to speed up indexing of your own Substrate chain, fork [this](https://github.com/subquery/subql-dictionary) project.
 
 #### Getting Started
+
 
 ##### 1. Install Dependencies 
 
