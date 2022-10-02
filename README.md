@@ -1,28 +1,120 @@
-# SubQuery - Dictionary 
+# Dictionary Implementation (Introduction)
 
-This special SubQuery Project provides a dictionary of data that pre-indexes events on chain to dramatically improve indexing the performance of your own SubQuery Project, sometimes up to 10x faster.
+## 🤔 Installation 
 
-It scans over the network, and simply records the module and method for every event/extrinsic on each block - please see the standard entities in `schema.graphql`.
+You can customiize your own implementation of the dictionary to fit your needs 
 
-**If you want to create your SubQuery Dictionary to speed up indexing of your own Substrate chain, fork this project and let us know**
+##### 1. Clone the Repository
 
-# Geting Started
-### 1. Install dependencies
-```shell
-yarn
+Clone this repository by running this script :
+
+```
+git clone https://github.com/capsule-corp-ternoa/ternoa-subql-dictionary
 ```
 
-### 2. Generate types
-```shell
+##### 2. Change Directory
+
+Change the Directory for the desired results : 
+```
+cd ternoa-subql-dictionary
+```
+
+##### 3. Select Testnet
+
+```
+git checkout v40/testnet
+# The indexer and dictionary should be on same version.
+
+```
+
+##### 4. Install Dependencies
+
+Install the required dependencies for the project using :
+
+```
+yarn install
+```
+##### 5. Generate Code from GraphQL
+
+Generate code from your GraphQL schema and Operations :
+
+```
 yarn codegen
 ```
 
-### 3. Build
-```shell
+##### 6. Build your Implementation
+
+Create an Executable version of your project :
+    
+```
 yarn build
 ```
 
-### 4. Run locally
-```shell
+##### 7. Docker pull
+
+Pull latest versions of the Docker image using :
+
+```
+docker-compose pull
+```
+
+##### 8. Run 
+
+Run your compiled app with Docker using :
+
+```
+docker-compose up
+```
+
+**Wait a couple of seconds for the indexing to start, after that, you can access the Blockchain data in your [local](http://localhost:3000/) GraphQL playground**
+
+### Using Dictionary as Block Explorer 
+
+The Dictionary records all generic data (intrinsic and extrinsic) which can later be used to relay On-Chain information in an appropriate manner for an [explorer](https://etherscan.io/). 
+
+Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here.
+
+## Using Dictionary as an Explorer
+
+## SubQuery - Project
+
+**SubQuery allows developers to extract, transform and query blockchain data in real time using GraphQL.**
+
+What SubQuery Dictionary does is provide a glossary of data that pre indexes On-Chain events thereby significantly improving the Indexing performance of your own project.
+
+It scans the network for each and all events (intrinsic or extrinsic) block by block and records the results.
+
+If you want to create your SubQuery Dictionary to speed up indexing of your own Substrate chain, fork [this](https://github.com/subquery/subql-dictionary) project.
+
+#### Getting Started
+
+##### 1. Install Dependencies 
+
+Install all the required dependencies by running this script :
+
+```
+yarn
+```
+
+##### 2. Generate Types
+
+Code generation is handled using the following script :
+
+```
+yarn codegen
+```
+
+##### 3. Build the Implementation
+
+Use this script to build an executable implementation of the Dictionary :
+```
+yarn build
+```
+
+##### 4. Run it locally
+
+Run your Implementation locally using Docker :
+
+```
 yarn start:docker
 ```
