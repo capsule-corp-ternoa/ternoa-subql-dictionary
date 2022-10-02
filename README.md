@@ -4,7 +4,7 @@
 
 You can customiize your own implementation of the dictionary to fit your needs 
 
-##### 1. Clone the Repository
+#### 1. Clone the Repository
 
 Clone this repository by running this script :
 
@@ -12,29 +12,28 @@ Clone this repository by running this script :
 git clone https://github.com/capsule-corp-ternoa/ternoa-subql-dictionary
 ```
 
-##### 2. Change Directory
+#### 2. Change Directory
 
 Change the Directory for the desired results : 
 ```
 cd ternoa-subql-dictionary
 ```
 
-##### 3. Select Testnet
+#### 3. Select Testnet
 
 ```
 git checkout v40/testnet
 # The indexer and dictionary should be on same version.
-
 ```
 
-##### 4. Install Dependencies
+#### 4. Install Dependencies
 
 Install the required dependencies for the project using :
 
 ```
 yarn install
 ```
-##### 5. Generate Code from GraphQL
+#### 5. Generate Code from GraphQL
 
 Generate code from your GraphQL schema and Operations :
 
@@ -42,7 +41,7 @@ Generate code from your GraphQL schema and Operations :
 yarn codegen
 ```
 
-##### 6. Build your Implementation
+#### 6. Build your Implementation
 
 Create an Executable version of your project :
     
@@ -50,7 +49,7 @@ Create an Executable version of your project :
 yarn build
 ```
 
-##### 7. Docker pull
+#### 7. Docker pull
 
 Pull latest versions of the Docker image using :
 
@@ -58,7 +57,7 @@ Pull latest versions of the Docker image using :
 docker-compose pull
 ```
 
-##### 8. Run 
+#### 8. Run 
 
 Run your compiled app with Docker using :
 
@@ -68,13 +67,12 @@ docker-compose up
 
 **Wait a couple of seconds for the indexing to start, after that, you can access the Blockchain data in your [local](http://localhost:3000/) GraphQL playground**
 
-### Using Dictionary as Block Explorer 
+## Using Dictionary as an Explorer
+
 
 The Dictionary records all generic data (intrinsic and extrinsic) which can later be used to relay On-Chain information in an appropriate manner for an [explorer](https://etherscan.io/). 
 
 Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here.
-
-## Using Dictionary as an Explorer
 
 ## SubQuery - Project
 
