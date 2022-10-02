@@ -1,10 +1,10 @@
 # 🤔 Introduction
 
-The main function of the `dictionary` is for it to act as a middle man between the `Blockchain` and the `Indexer`. This allows the Indexer to query blocks' metadata from the dictionary. 
+The Dictionary provide a glossary of data that pre indexes On-Chain events which drastically improves the Indexing performance.
 
-This allows one to query blocks for specific events and return the required blocks. For example : If one wants to fetch NFT creation events only, the `Indexer` will ask the dictionary for the corresponding blocks therefore only returing blocks where NFT creation took place (5, 9, 32 etc.) instead of all blocks (1 - 100).
+The main function of the `Dictionary` is for it to act as a middle man between the `Blockchain` and the `Indexer`. This allows the Indexer to query a blocks metadata from the dictionary allowing one to query blocks for specific events and return the required blocks.
 
-This provide a glossary of data that pre indexes On-Chain events which drastically improves the Indexing performance.
+For example : If one wants to fetch `NFT creation` events only, the `Indexer` will ask the dictionary for the corresponding blocks therefore only returing blocks where NFT creation took place (5, 9, 32 etc.) instead of all blocks (1 - 100).
 
 
 ## Installation 
@@ -70,12 +70,12 @@ Run your compiled app with Docker using :
 docker-compose up
 ```
 
-**Wait a couple of seconds for the indexing to start, after that, you can access the Blockchain data in your [local](http://localhost:3000/) GraphQL playground**
+**Wait a couple of seconds for the indexing to start, after that you can access the Blockchain data in your [local](http://localhost:3000/) GraphQL playground**
 
 ## Using Dictionary as an Explorer
 
 
-The Dictionary records all generic data (intrinsic and extrinsic) which can later be used to relay On-Chain information in an appropriate manner for an [explorer](https://etherscan.io/). 
+The Dictionary records all generic data (intrinsic or extrinsic) which can later be used to relay On-Chain information in an appropriate manner for an [explorer](https://etherscan.io/). 
 
 Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here
 
@@ -83,7 +83,7 @@ Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here
 
 **SubQuery allows developers to extract, transform and query blockchain data in real time using GraphQL.**
 
-What SubQuery Dictionary does is provide a glossary of data that pre indexes On-Chain events thereby significantly improving the Indexing performance of your own project.
+What SubQuery Dictionary does is provide a glossary of data that pre indexes On-Chain events thereby significantly improving the Indexing performance of the project.
 
 It scans the network for each and all events (intrinsic or extrinsic) block by block and records the results.
 
