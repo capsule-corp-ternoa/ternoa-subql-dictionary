@@ -1,11 +1,10 @@
 # 🤔 Introduction
 
-The Dictionary provide a glossary of data that pre indexes On-Chain events which drastically improves the Indexing performance.
+The Dictionary provides a glossary of data that pre indexes On-Chain events, drastically improving the overall Indexing performance. Sometimes by a factor of 10, which is quite significant.
 
-The main function of the `Dictionary` is for it to act as a middle man between the `Blockchain` and the `Indexer`. This allows the Indexer to query a blocks metadata from the dictionary allowing one to query blocks for specific events and return the required blocks.
+The Dictionary acts as the middleman between the Blockchain and the Indexer. This allows the Indexer to query a block's metadata from the dictionary, allowing one to query blocks for specific events and only return the required blocks.
 
-For example : If one wants to fetch `NFT creation` events only, the `Indexer` will ask the dictionary for the corresponding blocks therefore only returing blocks where NFT creation took place (5, 9, 32 etc.) instead of all blocks (1 - 100).
-
+For example : If one wants to fetch NFT creation events only, the Indexer will ask the dictionary for the corresponding blocks, returning only the blocks where NFT creation took place (5, 9, 32, etc.) instead of all blocks (1 - 100).
 
 ## Installation 
 
@@ -24,7 +23,9 @@ Change the Directory for the desired results :
 cd ternoa-subql-dictionary
 ```
 
-#### 3. Select Testnet
+#### 3. Select Testnet version
+
+Select the appropriate testnet version which corresponds to the Indexer version you are using to ensure compatibility :
 
 ```
 git checkout v40/testnet
@@ -56,7 +57,7 @@ yarn build
 
 #### 7. Docker pull
 
-Pull latest versions of the Docker image using :
+Pull the latest versions of the Docker image using :
 
 ```
 docker-compose pull
@@ -85,7 +86,7 @@ Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here
 
 What SubQuery Dictionary does is provide a glossary of data that pre indexes On-Chain events thereby significantly improving the Indexing performance of the project.
 
-It scans the network for each and all events (intrinsic or extrinsic) block by block and records the results.
+It scans the network for all events (intrinsic or extrinsic) block by block and document the results.
 
 If you want to create your SubQuery Dictionary to speed up indexing of your own Substrate chain, fork [this](https://github.com/subquery/subql-dictionary) project.
 
