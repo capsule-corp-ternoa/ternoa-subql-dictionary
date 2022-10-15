@@ -78,48 +78,38 @@ docker-compose up
 
 The Dictionary records all generic data (intrinsic or extrinsic) which can later be used to relay On-Chain information in an appropriate manner for an [explorer](https://etherscan.io/). 
 
-Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) here
+Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) to browse all of the underlying activity on the Ternoa chain.
 
-## SubQuery - Project
+## Using the Dictionary
 
-**SubQuery allows developers to extract, transform and query blockchain data in real time using GraphQL.**
+You can significantly improve the indexation performance by using a dictionary endpoint instead of targeting the blockchain directly to gather data.
 
-What SubQuery Dictionary does is provide a glossary of data that pre indexes On-Chain events thereby significantly improving the Indexing performance of the project.
+Just make sure to select the correct endpoints for the desired networks :
 
-It scans the network for all events (intrinsic or extrinsic) block by block and document the results.
+As you can see that the endpoints for Networks are structured as `Wss://xxxxxxxx.ternoa.com` and `https://dictionary-xxxxxxxx.ternoa.com` which is replaced by the `Network designation`.
 
-If you want to create your SubQuery Dictionary to speed up indexing of your own Substrate chain, fork [this](https://github.com/subquery/subql-dictionary) project.
+The most famous network designations being `Mainnet`, `Alphanet`, `Chaosnet`, `Testnet` and various sub versions of the existing networks.
 
-#### Getting Started
+#### Examples -
 
-
-##### 1. Install Dependencies 
-
-Install all the required dependencies by running this script :
-
+For use on the `Testnet` :
 ```
-yarn
-```
-
-##### 2. Generate Types
-
-Code generation is handled using the following script :
-
-```
-yarn codegen
+  genesisHash: '0xd9adfc7ea82be63ba28088d62b96e9270ad2af25c962afc393361909670835b2' 
+  endpoint: 'wss://testnet.ternoa.com'
+  dictionary: 'https://dictionary-testnet.ternoa.dev/'
+  chaintypes:
+    file: ./types.json
 ```
 
-##### 3. Build the Implementation
-
-Use this script to build an executable implementation of the Dictionary :
+For use on the `Mainnet` :
 ```
-yarn build
+  genesisHash: '0xd44bcfb0e98da45ace37e4df8469e5dbba8c4fc5449acda24c50cea6f5f2ca99'
+  endpoint: 'wss://mainnet.ternoa.com'
+  dictionary: 'https://dictionary-mainnet.ternoa.dev/'
+  chaintypes:
+    file: ./types.json
 ```
 
-##### 4. Run it locally
-
-Run your Implementation locally using Docker :
-
-```
-yarn start:docker
-```
+The same goes for the `Chaos` network or its feature staging area `Staging.Chaos` 
+    
+**Learn more about the different network versions over at `Ternoa-Fundamentals/Networks`**
