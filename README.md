@@ -73,12 +73,6 @@ docker-compose up
 
 **Wait a couple of seconds for the indexing to start, after that you can access the Blockchain data in your [local](http://localhost:3000/) GraphQL playground**
 
-## Using Dictionary as an Explorer
-
-
-The Dictionary records all generic data (intrinsic or extrinsic) which can later be used to relay On-Chain information in an appropriate manner for an [explorer](https://etherscan.io/). 
-
-Explore Ternoa's explorer [Ternoa Scan](https://explorer.ternoa.com/) to browse all of the underlying activity on the Ternoa chain.
 
 ## Using the Dictionary
 
@@ -111,5 +105,17 @@ For use on the `Mainnet` :
 ```
 
 The same goes for the `Chaos` network or its feature staging area `Staging.Chaos` 
+
+The network endpoints for the sub nets stay the same whereas the dictionary endpoint varies slightly like `Staging.Chaos` or `Dev.Chaos`, only requiring the specific versions of a network. 
+
+For example, the Dictionary endpoint for `Staging.Chaos` being `https://dictionary-staging.ternoa.dev/` and `https://dictionary-dev.ternoa.dev/` for `Dev.Chaos`.
     
 **Learn more about the different network versions over at `Ternoa-Fundamentals/Networks`**
+
+## Using Dictionary as an Explorer
+
+
+As the Dictionary records all generic data (be it Intrinsic or Extrinsic), It can be later used to visualize and relay On-Chain information as a Block explorer like [etherscan](https://etherscan.io/) for the ethereum blockchain.
+
+
+You can use Ternoa's " [Explorer](https://explorer.ternoa.com/) " as a Blockchain Search Engine, which enables you to visualize the On-Chain activity, explore public addresses and their Transaction history, gather information about individual blocks and much more.
