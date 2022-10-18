@@ -1,16 +1,64 @@
-# 🤔 Introduction
+# 🚚 Ternoa Dictionary 
 
-The Dictionary provides a glossary of data that pre indexes On-Chain events, drastically improving the overall Indexing performance. Sometimes by a factor of 10, which is quite significant.
+Ternoa Dictionary records all the native substrate on-chain data of the Ternoa blockchain: blocks, extrinsics, and events. It is a glossary of data that pre-indexes chain events, drastically improving the overall indexing performance.
 
-The Dictionary acts as the middleman between the Blockchain and the Indexer. This allows the Indexer to query a block's metadata from the dictionary, allowing one to query blocks for specific events and only return the required blocks.
+You can start by familiarizing yourself with [Ternoa Explorer](https://explorer.ternoa.com/) as it was built using the Ternoa Dictionary.
 
-For example : If one wants to fetch NFT creation events only, the Indexer will ask the dictionary for the corresponding blocks, returning only the blocks where NFT creation took place (5, 9, 32, etc.) instead of all blocks (1 - 100).
+Don't forget to have fun with it, Cheers 🍻
 
-## Installation 
+**Table of Contents :** 
+
+- [Introduction](#🤔-introduction)
+  - [Dictionary](#dictionary)
+  - [Error Reporting](#error-reporting)
+- [Installation](#installation)
+  - [Clone the Repository](#1-clone-the-repository)
+  - [Change Directory](2-change-directory)
+  - [Select Testnet Version](#3-select-testnet-version)
+  - [Install Dependencies](#4-install-dependencies)
+  - [Generate Type from GraphQL](#5-generate-type-from-graphql)
+  - [Build your Implementation](#6-build-your-implementation)
+  - [Docker Pull](#7-docker-pull)
+  - [Run](#8-run)
+- [Using the Dictionary](#using-the-dictionary)
+  - [Examples](#examples)
+ - [Using Dictionary as an Explorer](#using-dictionary-as-an-explorer)
+
+
+## 🤔 Introduction
+
+**Ternoa is a Decentralised, Open source, NFT-centric Layer 1 blockchain that is multi-chain by design and aims to provide a technical stack to build scalable and secure NFTs with native support for advanced features.**
+
+#### For Builders By Builders
+
+NFTs native to our chain can be minted using High-level programming languages and doesn't require smart contract functionality.
+
+#### Native support for Advanced Features
+
+With native support for Secret NFTs, Delegating and Lending, Transaction Batching and much more, you might want to give it a try.
+
+### Dictionary
+
+Ternoa Dictionary records all the native substrate on-chain data of the Ternoa blockchain: blocks, extrinsics, and events. It is a glossary of data that pre-indexes chain events, drastically improving the overall indexing performance.
+
+The Dictionary acts as the middleman between the Blockchain and the Indexer. This allows the Indexer to query a block’s metadata from the dictionary, allowing one to query blocks for specific events and only return the required blocks. For example : If one wants to fetch NFT creation events only, the Indexer will ask the dictionary for the corresponding blocks, returning only the blocks where NFT creation took place (for example : 5, 9, 32, etc.) instead of all of the blocks (lets say 1 - 100).
+
+### Error Reporting
+
+If you encounter any errors along the way, technical or otherwise. Let us know and we'll deal with it swiftly.
+It'll help us further improve the overall experience for our users.
+
+- Open a discussion of type `General` in the [discussions section](https://github.com/capsule-corp-ternoa/ternoa-js/discussions) if you encounter any unexpected behaviour.
+- Open a Bug report using the [bug template](https://github.com/capsule-corp-ternoa/ternoa-js/issues/new/choose) if the bug persists.
+- If you can, suggest a fix in a pull request to resolve that issue.
+
+Make sure to document the error properly, keeping in mind that the better you describe it, the easier it is to deal with.
+
+##  Installation 
 
 #### 1. Clone the Repository
 
-Clone this repository by running this script :
+Clone this repository by running this command :
 
 ```
 git clone https://github.com/capsule-corp-ternoa/ternoa-subql-dictionary
@@ -18,14 +66,19 @@ git clone https://github.com/capsule-corp-ternoa/ternoa-subql-dictionary
 
 #### 2. Change Directory
 
-Change the Directory for the desired results : 
+Change the Directory for desired results : 
 ```
 cd ternoa-subql-dictionary
 ```
 
-#### 3. Select Testnet version
+#### 3. Select Network Environment 
 
-Select the appropriate testnet version which corresponds to the Indexer version you are using to ensure compatibility :
+Move to the appropriate branch depending on the targeted network environment :
+
+* `v43/mainnet` for Mainnet
+* `v43/alphanet` for Alphanet
+
+For example :
 
 ```
 git checkout v40/testnet
@@ -39,9 +92,9 @@ Install the required dependencies for the project using :
 ```
 yarn install
 ```
-#### 5. Generate Code from GraphQL
+#### 5. Generate Type from GraphQL
 
-Generate code from your GraphQL schema and Operations :
+Generate types from your GraphQL schema and Operations :
 
 ```
 yarn codegen
@@ -74,48 +127,32 @@ docker-compose up
 **Wait a couple of seconds for the indexing to start, after that you can access the Blockchain data in your [local](http://localhost:3000/) GraphQL playground**
 
 
-## Using the Dictionary
+## 🤯 Using the Dictionary
 
 You can significantly improve the indexation performance by using a dictionary endpoint instead of targeting the blockchain directly to gather data.
 
 Just make sure to select the correct endpoints for the desired networks :
 
-As you can see that the endpoints for Networks are structured as `Wss://xxxxxxxx.ternoa.com` and `https://dictionary-xxxxxxxx.ternoa.com` which is replaced by the `Network designation`.
+As you can see that the endpoints for Networks are structured as `wss://xxxxxxxx.ternoa.com` and `https://dictionary-xxxxxxxx.ternoa.com` which is replaced by the `Network designation`.
 
-The most famous network designations being `Mainnet`, `Alphanet`, `Chaosnet`, `Testnet` and various sub versions of the existing networks.
+Supported dictionary environment networks are Mainnet and Alphanet.
 
 #### Examples -
 
-For use on the `Testnet` :
+For use on `Mainnet` :
 ```
-  genesisHash: '0xd9adfc7ea82be63ba28088d62b96e9270ad2af25c962afc393361909670835b2' 
-  endpoint: 'wss://testnet.ternoa.com'
-  dictionary: 'https://dictionary-testnet.ternoa.dev/'
-  chaintypes:
-    file: ./types.json
+ genesisHash: '0x6859c81ca95ef624c9dfe4dc6e3381c33e5d6509e35e147092bfbc780f777c4e'
+ endpoint: 'wss://mainnet.ternoa.network'
 ```
 
-For use on the `Mainnet` :
+For use on `Alphanet` :
 ```
-  genesisHash: '0xd44bcfb0e98da45ace37e4df8469e5dbba8c4fc5449acda24c50cea6f5f2ca99'
-  endpoint: 'wss://mainnet.ternoa.com'
-  dictionary: 'https://dictionary-mainnet.ternoa.dev/'
-  chaintypes:
-    file: ./types.json
+ genesisHash: '0x18bcdb75a0bba577b084878db2dc2546eb21504eaad4b564bb7d47f9d02b6ace'
+ endpoint: 'wss://alphanet.ternoa.com'
 ```
 
-The same goes for the `Chaos` network or its feature staging area `Staging.Chaos` 
-
-The network endpoints for the sub nets stay the same whereas the dictionary endpoint varies slightly like `Staging.Chaos` or `Dev.Chaos`, only requiring the specific versions of a network. 
-
-For example, the Dictionary endpoint for `Staging.Chaos` being `https://dictionary-staging.ternoa.dev/` and `https://dictionary-dev.ternoa.dev/` for `Dev.Chaos`.
-    
 **Learn more about the different network versions over at `Ternoa-Fundamentals/Networks`**
 
 ## Using Dictionary as an Explorer
 
-
-As the Dictionary records all generic data (be it Intrinsic or Extrinsic), It can be later used to visualize and relay On-Chain information as a Block explorer like [etherscan](https://etherscan.io/) for the ethereum blockchain.
-
-
-You can use Ternoa's " [Explorer](https://explorer.ternoa.com/) " as a Blockchain Search Engine, which enables you to visualize the On-Chain activity, explore public addresses and their Transaction history, gather information about individual blocks and much more.
+Ternoa Explorer is an example of a project relying on Ternoa Dictionary. It enables you to visualize the on-chain activity, explore public addresses and their transaction histories, gather information about individual blocks and much more.
