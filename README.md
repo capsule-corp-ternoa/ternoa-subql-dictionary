@@ -2,30 +2,20 @@
 
 Ternoa Dictionary records all the native substrate on-chain data of the Ternoa blockchain: blocks, extrinsics, and events. It is a glossary of data that pre-indexes chain events, drastically improving the overall indexing performance.
 
-You can start by familiarizing yourself with [Ternoa Explorer](https://explorer.ternoa.com/) as it was built using the Ternoa Dictionary.
-
 Don't forget to have fun with it, Cheers 🍻
 
 **Table of Contents :** 
 
-- [Introduction](#🤔-introduction)
+- [Introduction](#introduction)
   - [Dictionary](#dictionary)
   - [Error Reporting](#error-reporting)
 - [Installation](#installation)
-  - [Clone the Repository](#1-clone-the-repository)
-  - [Change Directory](2-change-directory)
-  - [Select Testnet Version](#3-select-testnet-version)
-  - [Install Dependencies](#4-install-dependencies)
-  - [Generate Type from GraphQL](#5-generate-type-from-graphql)
-  - [Build your Implementation](#6-build-your-implementation)
-  - [Docker Pull](#7-docker-pull)
-  - [Run](#8-run)
 - [Using the Dictionary](#using-the-dictionary)
   - [Examples](#examples)
- - [Using Dictionary as an Explorer](#using-dictionary-as-an-explorer)
+- [Using Dictionary as an Explorer](#using-dictionary-as-an-explorer)
 
 
-## 🤔 Introduction
+## Introduction
 
 **Ternoa is a Decentralised, Open source, NFT-centric Layer 1 blockchain that is multi-chain by design and aims to provide a technical stack to build scalable and secure NFTs with native support for advanced features.**
 
@@ -39,8 +29,6 @@ With native support for Secret NFTs, Delegating and Lending, Transaction Batchin
 
 ### Dictionary
 
-Ternoa Dictionary records all the native substrate on-chain data of the Ternoa blockchain: blocks, extrinsics, and events. It is a glossary of data that pre-indexes chain events, drastically improving the overall indexing performance.
-
 The Dictionary acts as the middleman between the Blockchain and the Indexer. This allows the Indexer to query a block’s metadata from the dictionary, allowing one to query blocks for specific events and only return the required blocks. For example : If one wants to fetch NFT creation events only, the Indexer will ask the dictionary for the corresponding blocks, returning only the blocks where NFT creation took place (for example : 5, 9, 32, etc.) instead of all of the blocks (lets say 1 - 100).
 
 ### Error Reporting
@@ -48,8 +36,8 @@ The Dictionary acts as the middleman between the Blockchain and the Indexer. Thi
 If you encounter any errors along the way, technical or otherwise. Let us know and we'll deal with it swiftly.
 It'll help us further improve the overall experience for our users.
 
-- Open a discussion of type `General` in the [discussions section](https://github.com/capsule-corp-ternoa/ternoa-js/discussions) if you encounter any unexpected behaviour.
-- Open a Bug report using the [bug template](https://github.com/capsule-corp-ternoa/ternoa-js/issues/new/choose) if the bug persists.
+- Open a discussion of type `General` in the [discussions section](https://github.com/capsule-corp-ternoa/ternoa-subql-dictionary/discussions) if you encounter any unexpected behaviour.
+- Open a Bug report using the [bug template](https://github.com/capsule-corp-ternoa/ternoa-subql-dictionary/issues/new) if the bug persists.
 - If you can, suggest a fix in a pull request to resolve that issue.
 
 Make sure to document the error properly, keeping in mind that the better you describe it, the easier it is to deal with.
@@ -150,8 +138,6 @@ For use on `Alphanet` :
  genesisHash: '0x18bcdb75a0bba577b084878db2dc2546eb21504eaad4b564bb7d47f9d02b6ace'
  endpoint: 'wss://alphanet.ternoa.com'
 ```
-
-**Learn more about the different network versions over at `Ternoa-Fundamentals/Networks`**
 
 ## Using Dictionary as an Explorer
 
