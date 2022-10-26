@@ -22,5 +22,5 @@ set -x
 env | grep DB_
 
 # ----Installing Subql-query----
-npm install -g @subql/query
-subql-query --name subql-dictionary-ternoa --playground --unsafe #unsafe to get more than 100 rows
+npm install -g @subql/query@1.6.0
+subql-query --name subql-dictionary-ternoa --playground

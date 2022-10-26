@@ -1,7 +1,7 @@
 {
   "name": "ternoa-subql-dictionary",
   "version": "1.0.0",
-  "description": "A subquery project provide dictionary data & service for a substrate-based network",
+  "description": "Ternoa dictionary to query substrate on-chain data",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -b",
@@ -18,12 +18,20 @@
     "schema.graphql",
     "project.yaml"
   ],
-  "author": "Jay Ji",
+  "author": "Ghali Leouarz",
+  "contributors": [
+    {
+      "name": "Igor Papandinas"
+    }
+  ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@polkadot/api": "^6",
-    "@subql/types": "0.12.0",
-    "typescript": "4.4.4",
-    "@subql/cli": "latest"
+    "@polkadot/api": "9.6.1",
+    "@subql/cli": "1.6.4",
+    "@subql/types": "1.9.2",
+    "typescript": "4.8.x"
+  },
+  "dependencies": {
+    "node-fetch": "2.6.x"
   }
 }

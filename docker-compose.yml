@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: postgres
 
   subquery-node:
-    image: onfinality/subql-node:v0.29.1
+    image: onfinality/subql-node:v1.9.2
     depends_on:
       - "postgres"
     restart: always
@@ -24,14 +24,11 @@ services:
     volumes:
       - ./:/app
     command:
-      - '-f'
-      - '/app'
-      - '--db-schema=subql-dictionary-ternoa'
-      - '--timeout'
-      - '270'
+      - -f=/app
+      - --db-schema=subql-dictionary-ternoa
 
   graphql-engine:
-    image: onfinality/subql-query:latest
+    image: onfinality/subql-query:v1.6.0
     ports:
       - 3000:3000
     depends_on:
@@ -44,7 +41,5 @@ services:
       DB_HOST: postgres
       DB_PORT: 5432
     command:
-      - '--name'
-      - 'subql-dictionary-ternoa' #Same as your project db_schema
-      - '--playground'
-      - --unsafe #Allows us to query more than 100 rows
+      - --name=subql-dictionary-ternoa
+      - --playground

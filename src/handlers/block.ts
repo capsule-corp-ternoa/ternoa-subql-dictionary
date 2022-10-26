@@ -30,7 +30,7 @@ export const updateSession = async (blockRecord: Block) => {
         let sessionRecord = await Session.get(sessionId.toString())
         if (!sessionRecord){
             sessionRecord = new Session(sessionId.toString())
-            const validators = await api.query.session.validators()
+            const validators = (await api.query.session.validators()) as unknown as string[]
             sessionRecord.validators = validators.map(x => x.toString())
             await sessionRecord.save()
         }
