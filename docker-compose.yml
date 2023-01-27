@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: postgres
 
   subquery-node:
-    image: onfinality/subql-node:v1.9.2
+    image: onfinality/subql-node:v1.18.0
     depends_on:
       - "postgres"
     restart: always
@@ -24,7 +24,8 @@ services:
     volumes:
       - ./:/app
     command:
-      - -f=/app
+      - -f=/app/${PROJECT_PATH}
+      - --disable-historical=true
       - --db-schema=subql-dictionary-ternoa
 
   graphql-engine:

@@ -22,5 +22,5 @@ set -x
 env | grep DB_
 
 # ----Installing Subql-query----
-npm install -g @subql/query@1.6.0
+yarn global add @subql/query
 subql-query --name subql-dictionary-ternoa --playground

@@ -21,16 +21,25 @@ set -x
 
 env | grep DB_
 
+if [ -z $1 ]; then
+    echo "Provide a network name (e.g. 'betanet', 'alphanet' or 'mainnet')"
+    exit 1
+fi
+
+sh ./scripts/prepare_folders.sh
+
+cd ./networks/$1
+
 # ----Installing Subql-Node----
-npm install -g @subql/node@1.9.2
+yarn global add @subql/node@1.18.0
 
 # ----Installing dependencies----
-npm install
+yarn
 
 # ----Codegen Ternoa-Subql----
-npm run codegen
+yarn codegen
 
 # ----Building Ternoa-Subql----
-npm run build
+yarn build
 
-subql-node -f . --db-schema=subql-dictionary-ternoa --timeout $TIMEOUT --force-clean
+subql-node -f . --disable-historical=true --db-schema=subql-dictionary-ternoa --timeout $TIMEOUT --force-clean

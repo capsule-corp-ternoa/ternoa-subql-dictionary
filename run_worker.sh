@@ -23,5 +23,5 @@ env | grep DB_
 
 [ -z "$TIMEOUT" ] && export TIMEOUT="20000"
 
-npm install -g @subql/node@1.9.2
-subql-node -f . --db-schema=subql-dictionary-ternoa  --timeout $TIMEOUT
+yarn global add @subql/node@1.18.0
+subql-node -f . --disable-historical=true --db-schema=subql-dictionary-ternoa  --timeout $TIMEOUT

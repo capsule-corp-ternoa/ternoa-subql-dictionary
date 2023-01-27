@@ -21,11 +21,20 @@ set -x
 
 env | grep DB_
 
+if [ -z $1 ]; then
+    echo "Provide a network name (e.g. 'betanet', 'alphanet' or 'mainnet')"
+    exit 1
+fi
+
+sh ./scripts/prepare_folders.sh
+
+cd ./networks/$1
+
 # ----Installing Subql-query----
-npm install -g @subql/query
+yarn global add @subql/query
 
 # ----Installing Subql-Node----
-npm install -g @subql/node@1.9.2
+yarn global add @subql/node@1.18.0
 
 # ----Installing dependencies----
 yarn
