@@ -35,6 +35,7 @@
     "@polkadot/api": "9.12.x",
     "@subql/cli": "1.10.x",
     "@subql/types": "1.7.x",
+    "node-fetch": "2.6.x",
     "typescript": "4.9.x"
   }
 }
