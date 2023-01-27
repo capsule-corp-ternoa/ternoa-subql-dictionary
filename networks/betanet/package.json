@@ -8,7 +8,7 @@
     "prepack": "rm -rf dist && npm build",
     "test": "jest",
     "codegen": "./node_modules/.bin/subql codegen",
-    "start": "bash run.sh",
+    "start": "bash run.sh betanet",
     "start:docker": "docker-compose pull && docker-compose up --remove-orphans"
   },
   "homepage": "https://github.com/subquery/subql-starter",

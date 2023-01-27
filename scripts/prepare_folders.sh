@@ -8,7 +8,6 @@ for item in ${folders[*]}
 do
   printf "   %s\n" $item
   scp -r ${MAIN_DIRECTORY}/src ${MAIN_DIRECTORY}/networks/$item
-  scp ${MAIN_DIRECTORY}/package.json ${MAIN_DIRECTORY}/networks/$item
   scp ${MAIN_DIRECTORY}/tsconfig.json ${MAIN_DIRECTORY}/networks/$item
   scp ${MAIN_DIRECTORY}/schema.graphql ${MAIN_DIRECTORY}/networks/$item
   scp ${MAIN_DIRECTORY}/local-runner.sh ${MAIN_DIRECTORY}/networks/$item

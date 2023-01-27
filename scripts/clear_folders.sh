@@ -9,7 +9,6 @@ do
   printf "   %s\n" $item
   if [ -d "${MAIN_DIRECTORY}/networks/$item/src" ]; then
   rm -r ${MAIN_DIRECTORY}/networks/$item/src
-  rm ${MAIN_DIRECTORY}/networks/$item/package.json
   rm ${MAIN_DIRECTORY}/networks/$item/tsconfig.json
   rm ${MAIN_DIRECTORY}/networks/$item/schema.graphql
   rm ${MAIN_DIRECTORY}/networks/$item/local-runner.sh
