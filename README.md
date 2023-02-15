@@ -4,20 +4,6 @@ Ternoa Dictionary records all the native substrate on-chain data of the Ternoa b
 
 Don't forget to have fun with it, Cheers 🍻
 
-> ⚠️ DISCLAIMER
->
-> Some blocks containing technicalCommittee.close extrinsic are corupted on Mainnet. There is an outsync from the proposalWeightBound parameter type.
-> Please make sure to skip them when syncing the Dictionary.
->
-> The corrupted block list for MAINNET:
->
-> - 2,411,217
-> - 2,411,393
-> - 2,412,944
-> - 2,423,798
-> - 2,425,504
-> - 2,768,585
-
 **Table of Contents:**
 
 - [Introduction](#introduction)
