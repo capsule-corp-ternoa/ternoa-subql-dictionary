@@ -31,5 +31,5 @@ sh ./scripts/prepare_folders.sh
 cd ./networks/$1
 
 # ----Installing Subql-query----
-npm install -g @subql/query@1.8.0
+npm install -g @subql/query@1.6.0
 subql-query --name subql-dictionary-ternoa --playground
