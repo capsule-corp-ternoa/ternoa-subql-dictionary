@@ -21,7 +21,7 @@ set -x
 
 env | grep DB_
 
-[ -z "$TIMEOUT" ] && export TIMEOUT="20000"
+[ -z "$TIMEOUT" ] && export TIMEOUT="50000"
 
 if [ -z $1 ]; then
     echo "Provide a network name (e.g. 'betanet', 'alphanet' or 'mainnet')"
@@ -33,4 +33,4 @@ sh ./scripts/prepare_folders.sh
 cd ./networks/$1
 
 npm install -g @subql/node@1.16.0
-subql-node -f . --disable-historical=true --db-schema=subql-dictionary-ternoa  --timeout $TIMEOUT
+subql-node -f . --disable-historical=true --db-schema=subql-dictionary-ternoa --timeout $TIMEOUT
