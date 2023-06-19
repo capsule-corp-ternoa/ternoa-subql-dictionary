@@ -41,7 +41,7 @@ type Extrinsic @entity {
   feesRounded: Float
   nonce: Int!
   argsName: [String]!
-  argsValue: [String]! @index
+  argsValue: [String]!
   nbEvents: Int!
 }
 
@@ -64,7 +64,7 @@ type Event @entity {
   call: String! @index
   description: EventDescription!
   argsName: [String]!
-  argsValue: [String]! @index
+  argsValue: [String]!
 }
 
 
