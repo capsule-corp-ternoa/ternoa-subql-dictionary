@@ -20,6 +20,7 @@ set -x
 [ -z "$DB_PORT" ] && export DB_PORT="$POSTGRESQL_ADDON_PORT"
 
 env | grep DB_
+[ -z "$TIMEOUT" ] && export TIMEOUT="50000"
 
 if [ -z $1 ]; then
     echo "Provide a network name (e.g. 'betanet', 'alphanet' or 'mainnet')"
@@ -32,4 +33,4 @@ cd ./networks/$1
 
 # ----Installing Subql-query----
 npm install -g @subql/query@1.6.0
-subql-query --name subql-dictionary-ternoa --playground
+subql-query --name subql-dictionary-ternoa --playground --query-timeout $TIMEOUT
