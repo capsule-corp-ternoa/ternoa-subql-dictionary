@@ -4,13 +4,13 @@ set -x
 
 [ -z "$APP_HOME" ] && export APP_HOME=$(pwd)
 
-[ -z "$POSTGRESQL_ADDON_USER" ] && export POSTGRESQL_ADDON_USER="postgres"
+[ -z "$POSTGRESQL_ADDON_USER" ] && export POSTGRESQL_ADDON_USER="dico"
 [ -z "$DB_USER" ] && export DB_USER="$POSTGRESQL_ADDON_USER"
 
-[ -z "$POSTGRESQL_ADDON_PASSWORD" ] && export POSTGRESQL_ADDON_PASSWORD="postgres"
+[ -z "$POSTGRESQL_ADDON_PASSWORD" ] && export POSTGRESQL_ADDON_PASSWORD="dico"
 [ -z "$DB_PASS" ] && export DB_PASS="$POSTGRESQL_ADDON_PASSWORD"
 
-[ -z "$POSTGRESQL_ADDON_DB" ] && export POSTGRESQL_ADDON_DB="postgres"
+[ -z "$POSTGRESQL_ADDON_DB" ] && export POSTGRESQL_ADDON_DB="bjnfyikjfcjugpovk8np"
 [ -z "$DB_DATABASE" ] && export DB_DATABASE="$POSTGRESQL_ADDON_DB"
 
 [ -z "$POSTGRESQL_ADDON_HOST" ] && export POSTGRESQL_ADDON_HOST="localhost"
@@ -30,6 +30,9 @@ sh ./scripts/prepare_folders.sh
 
 cd ./networks/$1
 
+# ----Installing Subql-query----
+npm install -g @subql/query@1.6.0
+
 # ----Installing Subql-Node----
 npm install -g @subql/node@1.16.0
 
@@ -43,3 +46,4 @@ yarn codegen
 yarn build
 
 subql-node -f . --disable-historical=true --db-schema=subql-dictionary-ternoa --timeout $TIMEOUT --force-clean
+# subql-node -f . --disable-historical=true --db-schema=subql-dictionary-ternoa --timeout 50000 --force-clean

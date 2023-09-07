@@ -8,6 +8,7 @@ node_modules/
 dist/
 package-lock.json
 yarn.lock
+networks
 
 # Compiled Java class files
 *.class

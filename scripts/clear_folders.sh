@@ -2,11 +2,11 @@
 SCRIPT_PATH=$(dirname "$0")
 MAIN_DIRECTORY=${SCRIPT_PATH%/*}
 
-folders=($(ls ${MAIN_DIRECTORY}/networks))
+folders=$(ls ${MAIN_DIRECTORY}/networks)
 
-for item in ${folders[*]}
+for item in $folders
 do
-  printf "   %s\n" $item
+  printf " ITEM=>  %s\n" $item
   if [ -d "${MAIN_DIRECTORY}/networks/$item/src" ]; then
   rm -r ${MAIN_DIRECTORY}/networks/$item/src
   rm ${MAIN_DIRECTORY}/networks/$item/package.json
