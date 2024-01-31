@@ -33,8 +33,8 @@
   },
   "devDependencies": {
     "@polkadot/api": "10.7.x",
-    "@subql/cli":"1.13.x",
-    "@subql/types":"1.7.x",
-    "typescript":"5.0.x"
+    "@subql/cli": "4.2.5",
+    "@subql/types": "3.3.0",
+    "typescript": "5.0.x"
   }
 }
