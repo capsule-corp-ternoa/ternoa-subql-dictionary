@@ -41,12 +41,11 @@ export const updateSession = async (blockRecord: Block) => {
     }
 }
 
-export const updateSpecversion = async (specVersion: SpecVersion, blockSpecVersion: number, blockNumber: bigint) => {
+export const updateSpecversion = async (specVersion: SpecVersion, blockSpecVersion: number, blockHeight: bigint) => {
     if (!specVersion) {
         specVersion = await SpecVersion.get(blockSpecVersion.toString());
     }
     if (!specVersion || specVersion.id !== blockSpecVersion.toString()) {
-        const blockHeight = blockNumber;
         specVersion = new SpecVersion(blockSpecVersion.toString(), blockHeight);
         await specVersion.save();
     }
