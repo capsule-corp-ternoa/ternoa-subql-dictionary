@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: postgres
 
   subquery-node:
-    image: onfinality/subql-node:v1.16.0
+    image: onfinality/subql-node:v3.5.3
     depends_on:
       - "postgres"
     restart: always
@@ -29,7 +29,7 @@ services:
       - --db-schema=subql-dictionary-ternoa
 
   graphql-engine:
-    image: onfinality/subql-query:v1.6.0
+    image: onfinality/subql-query:v2.9.0
     ports:
       - 3000:3000
     depends_on:

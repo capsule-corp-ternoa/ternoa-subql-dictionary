@@ -32,9 +32,9 @@
     "node-fetch": "2.6.x"
   },
   "devDependencies": {
-    "@polkadot/api": "10.7.x",
-    "@subql/cli": "4.2.5",
-    "@subql/types": "3.3.0",
+    "@polkadot/api": "^10",
+    "@subql/cli": "^4.2.6",
+    "@subql/types": "^3.3.1",
     "typescript": "5.0.x"
   }
 }
