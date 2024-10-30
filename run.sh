@@ -32,5 +32,5 @@ sh ./scripts/prepare_folders.sh
 cd ./networks/$1
 
 # ----Installing Subql-query----
-npm install -g @subql/query@2.9.0
+npm install -g @subql/query@2.13.1
 subql-query --name subql-dictionary-ternoa --playground --query-timeout $TIMEOUT

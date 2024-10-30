@@ -31,10 +31,10 @@ sh ./scripts/prepare_folders.sh
 cd ./networks/$1
 
 # ----Installing Subql-query----
-npm install -g @subql/query@2.9.0
+npm install -g @subql/query@2.13.1
 
 # ----Installing Subql-Node----
-npm install -g @subql/node@3.5.3
+npm install -g @subql/node@4.7.0
 
 # ----Installing dependencies----
 yarn

@@ -32,5 +32,5 @@ sh ./scripts/prepare_folders.sh
 
 cd ./networks/$1
 
-npm install -g @subql/node@3.5.3
+npm install -g @subql/node@4.7.0
 subql-node -f . --disable-historical=true --db-schema=subql-dictionary-ternoa --timeout $TIMEOUT
