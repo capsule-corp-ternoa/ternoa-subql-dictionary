@@ -36,5 +36,8 @@
     "@subql/cli": "4.2.6",
     "@subql/types": "3.3.1",
     "typescript": "5.0.x"
+  },
+  "engines": {
+    "node": "18.20.5"
   }
 }
